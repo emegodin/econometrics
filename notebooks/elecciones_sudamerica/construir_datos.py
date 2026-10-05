@@ -41,6 +41,14 @@ COMPLEMENTO = {
 }
 
 
+# Saltos de serie en Maddison que no reflejan crecimiento real; se reemplazan
+# por la tasa oficial (BCRP para Perú, BCP para Paraguay).
+CORRECCIONES = {
+    ("Peru", 1993): 4.8,      # Maddison: -16.6
+    ("Paraguay", 2002): 0.0,  # Maddison: +15.4
+}
+
+
 def serie_crecimiento():
     owid = pd.read_csv(URL_OWID, usecols=["country", "year", "gdp"])
     owid = owid[owid.country.isin(PAISES) & (owid.year >= 1975)].dropna()
@@ -48,6 +56,10 @@ def serie_crecimiento():
     owid = owid.sort_values(["pais", "year"])
     owid["crecimiento"] = owid.groupby("pais").gdp.pct_change() * 100
     owid["fuente"] = "Maddison 2023 (OWID)"
+    for (pais, anio), valor in CORRECCIONES.items():
+        fila = (owid.pais == pais) & (owid.year == anio)
+        owid.loc[fila, "crecimiento"] = valor
+        owid.loc[fila, "fuente"] = "Oficial (corrige salto de serie en Maddison)"
     g = owid.rename(columns={"year": "anio"})[["pais", "anio", "crecimiento", "fuente"]]
 
     extra = pd.DataFrame(
