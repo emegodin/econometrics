@@ -1,16 +1,14 @@
 """
-Construye la serie de crecimiento del PIB real (% anual) para 10 países de
-América del Sur y la cruza con la base de elecciones presidenciales.
+Construye las series de crecimiento del PIB real y de desempleo para 10 países
+de América del Sur y las cruza con la base de elecciones presidenciales.
 
-Fuentes
+Fuentes (indicadores del Banco Mundial, vía el espejo
+datasets/world-development-indicators en GitHub)
 -------
-* 1975-2022: PIB del Maddison Project Database 2023 (Bolt y van Zanden),
-  tal como lo publica Our World in Data en GitHub (columna `gdp`).
-* 2023-2024: no están en Maddison. Se completan a mano con las tasas de
-  crecimiento oficiales / FMI (WEO) y quedan marcadas en la columna `fuente`.
-* Desempleo (% de la fuerza laboral), 1991-2025: estimación modelada de la OIT
-  publicada por el Banco Mundial (indicador SL.UEM.TOTL.ZS), vía el espejo
-  datasets/world-development-indicators en GitHub.
+* Crecimiento del PIB real (% anual), 1978-2025: NY.GDP.MKTP.KD.ZG
+  (PIB a precios constantes, cuentas nacionales oficiales).
+* Desempleo (% de la fuerza laboral), 1991-2025: SL.UEM.TOTL.ZS
+  (estimación modelada de la OIT).
 
 Salida: data/pib_crecimiento.csv, data/desempleo.csv y data/base_analisis.csv
 """
@@ -20,70 +18,26 @@ import pandas as pd
 
 AQUI = Path(__file__).parent
 DATA = AQUI / "data"
-URL_OWID = "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv"
-URL_DESEMPLEO = ("https://raw.githubusercontent.com/datasets/world-development-indicators/"
-                 "main/indicators/sl.uem.totl.zs/data.csv")
+URL_WDI = ("https://raw.githubusercontent.com/datasets/world-development-indicators/"
+           "main/indicators/{}/data.csv")
 ISO = {"ARG": "Argentina", "BOL": "Bolivia", "BRA": "Brasil", "CHL": "Chile",
        "COL": "Colombia", "ECU": "Ecuador", "PRY": "Paraguay", "PER": "Peru",
        "URY": "Uruguay", "VEN": "Venezuela"}
 
-PAISES = {  # nombre en OWID -> nombre en la base de elecciones
-    "Argentina": "Argentina", "Bolivia": "Bolivia", "Brazil": "Brasil",
-    "Chile": "Chile", "Colombia": "Colombia", "Ecuador": "Ecuador",
-    "Paraguay": "Paraguay", "Peru": "Peru", "Uruguay": "Uruguay",
-    "Venezuela": "Venezuela",
-}
 
-# Crecimiento del PIB real 2023 y 2024 (%), cifras oficiales / FMI aproximadas.
-# Venezuela no se usa después de 2013, por eso no se completa.
-COMPLEMENTO = {
-    "Argentina": {2023: -1.6, 2024: -1.3},
-    "Bolivia":   {2023: 3.1,  2024: 0.7},
-    "Brasil":    {2023: 3.2,  2024: 3.4},
-    "Chile":     {2023: 0.5,  2024: 2.6},
-    "Colombia":  {2023: 0.7,  2024: 1.6},
-    "Ecuador":   {2023: 2.4,  2024: -2.0},
-    "Paraguay":  {2023: 5.0,  2024: 4.2},
-    "Peru":      {2023: -0.4, 2024: 3.3},
-    "Uruguay":   {2023: 0.7,  2024: 3.1},
-}
-
-
-# Saltos de serie en Maddison que no reflejan crecimiento real; se reemplazan
-# por la tasa oficial (BCRP para Perú, BCP para Paraguay).
-CORRECCIONES = {
-    ("Peru", 1993): 4.8,      # Maddison: -16.6
-    ("Paraguay", 2002): 0.0,  # Maddison: +15.4
-}
+def serie_wdi(indicador, nombre):
+    w = pd.read_csv(URL_WDI.format(indicador))
+    w = w[w["Country Code"].isin(ISO)]
+    w = w.assign(pais=w["Country Code"].map(ISO)).rename(columns={"Year": "anio", "Value": nombre})
+    return w[["pais", "anio", nombre]].dropna().sort_values(["pais", "anio"]).reset_index(drop=True)
 
 
 def serie_crecimiento():
-    owid = pd.read_csv(URL_OWID, usecols=["country", "year", "gdp"])
-    owid = owid[owid.country.isin(PAISES) & (owid.year >= 1975)].dropna()
-    owid["pais"] = owid.country.map(PAISES)
-    owid = owid.sort_values(["pais", "year"])
-    owid["crecimiento"] = owid.groupby("pais").gdp.pct_change() * 100
-    owid["fuente"] = "Maddison 2023 (OWID)"
-    for (pais, anio), valor in CORRECCIONES.items():
-        fila = (owid.pais == pais) & (owid.year == anio)
-        owid.loc[fila, "crecimiento"] = valor
-        owid.loc[fila, "fuente"] = "Oficial (corrige salto de serie en Maddison)"
-    g = owid.rename(columns={"year": "anio"})[["pais", "anio", "crecimiento", "fuente"]]
-
-    extra = pd.DataFrame(
-        [(p, a, v, "Oficial/FMI (cargado a mano)")
-         for p, d in COMPLEMENTO.items() for a, v in d.items()],
-        columns=["pais", "anio", "crecimiento", "fuente"],
-    )
-    return pd.concat([g.dropna(), extra]).sort_values(["pais", "anio"]).reset_index(drop=True)
+    return serie_wdi("ny.gdp.mktp.kd.zg", "crecimiento")
 
 
 def serie_desempleo():
-    u = pd.read_csv(URL_DESEMPLEO)
-    u = u[u["Country Code"].isin(ISO)]
-    u = u.assign(pais=u["Country Code"].map(ISO)).rename(columns={"Year": "anio", "Value": "desempleo"})
-    return u[["pais", "anio", "desempleo"]].sort_values(["pais", "anio"]).reset_index(drop=True)
-
+    return serie_wdi("sl.uem.totl.zs", "desempleo")
 
 def armar_base(elec, g, u):
     """Para una elección en el año t usa los años calendario t-4 ... t-1."""
@@ -100,6 +54,8 @@ def armar_base(elec, g, u):
             "crec_ult2": (c[1] + c[2]) / 2,
             "crec_prim2": (c[3] + c[4]) / 2,
             "recesion_ult2": int(min(c[1], c[2]) < 0),
+            # Recesión "de verdad": algún año con caída de más de 1%
+            "recesion_fuerte": int(min(c[1], c[2]) < -1),
             "crec_t1": c[1], "crec_t2": c[2], "crec_t3": c[3], "crec_t4": c[4],
             # Robustez para elecciones del 2º semestre: incluye el año electoral
             "crec_t0": tasa.get((e.pais, t)),

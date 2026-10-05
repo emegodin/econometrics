@@ -5,70 +5,81 @@ HIPÓTESIS 1: umbral de crecimiento promedio (4 años previos)
 ==============================================================================
 
 1.a) Tasa de alternancia por tramo de crecimiento promedio
-      < 1%:   80%  (16/20)
-      1-2%:   67%  (6/9)
-      2-3%:   73%  (8/11)
-      3-4%:   69%  (11/16)
-      4-5%:   47%  (9/19)
-      > 5%:   20%  (3/15)
+      < 1%:   76%  (16/21)
+      1-2%:   75%  (6/8)
+      2-3%:   85%  (11/13)
+      3-4%:   62%  (8/13)
+      4-5%:   35%  (8/23)
+      > 5%:   33%  (4/12)
 
 1.b) Búsqueda del umbral que mejor separa alternancia / continuidad
-  [todas] n=90  umbral estimado = 4.49% anual
-    alternancia debajo del umbral: 72% (47/65)
-    alternancia encima del umbral: 24% (6/25)
+  [todas] n=90  umbral estimado = 3.73% anual
+    alternancia debajo del umbral: 80% (39/49)
+    alternancia encima del umbral: 34% (14/41)
+    p-valor por permutación (corrige por búsqueda): 0.000
+  [sin interinos ni anticipadas] n=75  umbral estimado = 2.68% anual
+    alternancia debajo del umbral: 89% (25/28)
+    alternancia encima del umbral: 36% (17/47)
     p-valor por permutación (corrige por búsqueda): 0.001
-  [sin interinos ni anticipadas] n=75  umbral estimado = 4.49% anual
-    alternancia debajo del umbral: 73% (37/51)
-    alternancia encima del umbral: 21% (5/24)
-    p-valor por permutación (corrige por búsqueda): 0.001
-  [sólo sin presidente candidato] n=71  umbral estimado = 4.54% anual
-    alternancia debajo del umbral: 79% (45/57)
-    alternancia encima del umbral: 43% (6/14)
-    p-valor por permutación (corrige por búsqueda): 0.140
+  [sólo sin presidente candidato] n=71  umbral estimado = 3.73% anual
+    alternancia debajo del umbral: 88% (37/42)
+    alternancia encima del umbral: 48% (14/29)
+    p-valor por permutación (corrige por búsqueda): 0.005
 
 1.c) ¿Escalón o curva suave? Comparación de modelos (AIC: menor = mejor)
-    curva suave (logit lineal)  AIC =  115.0
-    escalón en 4.49%          AIC =  108.3
-    ambos juntos                AIC =  110.0  (p escalón = 0.004, p lineal = 0.399)
+    curva suave (logit lineal)  AIC =  114.9
+    escalón en 3.73%          AIC =  106.2
+    ambos juntos                AIC =  108.2  (p escalón = 0.006, p lineal = 0.739)
     Nota: el AIC del escalón está sesgado a favor porque el corte se eligió con los mismos datos.
-    Curva suave: cada punto más de crecimiento promedio cambia la prob. de alternancia en -6.9 pp (p = 0.000)
+    Curva suave: cada punto más de crecimiento promedio cambia la prob. de alternancia en -7.1 pp (p = 0.000)
 
 1.d) Controlando por presidente candidato a la reelección (EE agrupados por país)
-    Estar debajo del umbral: +28.2 pp de prob. de alternancia (p = 0.005)
-    Presidente en ejercicio candidato: -44.0 pp (p = 0.000)
+    Estar debajo del umbral: +31.8 pp de prob. de alternancia (p = 0.000)
+    Presidente en ejercicio candidato: -47.4 pp (p = 0.000)
 
 ==============================================================================
 HIPÓTESIS 2: desaceleración o recesión en los 2 años previos
 ==============================================================================
   Definiciones:
    - recesión  = al menos uno de los dos años previos con crecimiento negativo
+   - recesión fuerte = al menos uno de los dos años previos con caída de más de 1%
    - frenazo   = crecimiento promedio de los 2 últimos años menor que el de los 2 anteriores
 
 2.a) Comparación simple [todas, n=90]
-    Con recesión: 78% alternancia (18/23)   Sin recesión: 52% (35/67)   diferencia +26 pp, p Fisher (una cola) = 0.024
-    Con frenazo: 63% alternancia (31/49)   Sin frenazo: 54% (22/41)   diferencia +10 pp, p Fisher (una cola) = 0.240
+    Con recesión: 67% alternancia (20/30)   Sin recesión: 55% (33/60)   diferencia +12 pp, p Fisher (una cola) = 0.203
+    Con recesión fuerte: 75% alternancia (15/20)   Sin recesión fuerte: 54% (38/70)   diferencia +21 pp, p Fisher (una cola) = 0.079
+    Con frenazo: 62% alternancia (30/48)   Sin frenazo: 55% (23/42)   diferencia +8 pp, p Fisher (una cola) = 0.298
 
 2.a) Comparación simple [sin interinos ni anticipadas, n=75]
-    Con recesión: 83% alternancia (15/18)   Sin recesión: 47% (27/57)   diferencia +36 pp, p Fisher (una cola) = 0.007
-    Con frenazo: 62% alternancia (26/42)   Sin frenazo: 48% (16/33)   diferencia +13 pp, p Fisher (una cola) = 0.177
+    Con recesión: 71% alternancia (17/24)   Sin recesión: 49% (25/51)   diferencia +22 pp, p Fisher (una cola) = 0.062
+    Con recesión fuerte: 81% alternancia (13/16)   Sin recesión fuerte: 49% (29/59)   diferencia +32 pp, p Fisher (una cola) = 0.020
+    Con frenazo: 61% alternancia (25/41)   Sin frenazo: 50% (17/34)   diferencia +11 pp, p Fisher (una cola) = 0.236
+
+2.a) Comparación simple [sin presidente candidato, n=71]
+    Con recesión: 75% alternancia (18/24)   Sin recesión: 70% (33/47)   diferencia +5 pp, p Fisher (una cola) = 0.448
+    Con recesión fuerte: 93% alternancia (13/14)   Sin recesión fuerte: 67% (38/57)   diferencia +26 pp, p Fisher (una cola) = 0.045
 
 2.b) Modelos logit (efectos marginales en puntos porcentuales; EE agrupados por país)
    [todas]
-    M1 recesión                                      recesion_ult2 +27.3pp (p=0.03)
-    M2 frenazo                                       frenazo +9.5pp (p=0.32)
-    M3 ambos + crec. 4a + reelección                 recesion_ult2 +20.5pp (p=0.37), frenazo +2.8pp (p=0.72), crec_4a -3.1pp (p=0.32), presidente_candidato -54.8pp (p=0.00)
-    M4 continuo: niveles últ.2 y prim.2 + reelección crec_ult2 -2.6pp (p=0.05), crec_prim2 -2.2pp (p=0.10), presidente_candidato -48.6pp (p=0.00)
-    ¿Pesan más los 2 años recientes que los 2 anteriores? (M4, Wald) p = 0.810
+    M1 recesión                                      recesion_ult2 +11.8pp (p=0.04)
+    M1b recesión fuerte                              recesion_fuerte +21.7pp (p=0.08)
+    M1c recesión fuerte + crec. 4a + reelección      recesion_fuerte +27.0pp (p=0.18), crec_4a -3.7pp (p=0.15), presidente_candidato -61.5pp (p=0.00)
+    M2 frenazo                                       frenazo +7.7pp (p=0.51)
+    M3 ambos + crec. 4a + reelección                 recesion_ult2 -13.3pp (p=0.08), frenazo +12.3pp (p=0.10), crec_4a -7.2pp (p=0.00), presidente_candidato -48.2pp (p=0.00)
+    M4 continuo: niveles últ.2 y prim.2 + reelección crec_ult2 -2.8pp (p=0.03), crec_prim2 -2.7pp (p=0.02), presidente_candidato -49.8pp (p=0.00)
+    ¿Pesan más los 2 años recientes que los 2 anteriores? (M4, Wald) p = 0.976
    [sin interinos ni anticipadas]
-    M1 recesión                                      recesion_ult2 +38.2pp (p=0.00)
-    M2 frenazo                                       frenazo +13.2pp (p=0.13)
-    M3 ambos + crec. 4a + reelección                 recesion_ult2 +23.5pp (p=0.42), frenazo +6.2pp (p=0.37), crec_4a -5.7pp (p=0.13), presidente_candidato -50.9pp (p=0.00)
-    M4 continuo: niveles últ.2 y prim.2 + reelección crec_ult2 -5.0pp (p=0.00), crec_prim2 -2.8pp (p=0.13), presidente_candidato -40.9pp (p=0.00)
-    ¿Pesan más los 2 años recientes que los 2 anteriores? (M4, Wald) p = 0.229
+    M1 recesión                                      recesion_ult2 +21.9pp (p=0.00)
+    M1b recesión fuerte                              recesion_fuerte +34.4pp (p=0.00)
+    M1c recesión fuerte + crec. 4a + reelección      no estimable (separación perfecta: muy pocos casos)
+    M2 frenazo                                       frenazo +10.9pp (p=0.32)
+    M3 ambos + crec. 4a + reelección                 recesion_ult2 -13.8pp (p=0.09), frenazo +15.3pp (p=0.00), crec_4a -10.6pp (p=0.00), presidente_candidato -41.4pp (p=0.00)
+    M4 continuo: niveles últ.2 y prim.2 + reelección crec_ult2 -5.1pp (p=0.00), crec_prim2 -3.7pp (p=0.03), presidente_candidato -42.8pp (p=0.00)
+    ¿Pesan más los 2 años recientes que los 2 anteriores? (M4, Wald) p = 0.396
 
 2.c) Robustez: elecciones del 2º semestre usando también el año electoral
-    Con recesión: 76% alternancia (19/25)   Sin recesión: 51% (32/63)   diferencia +25 pp, p Fisher (una cola) = 0.026
-    Con frenazo: 64% alternancia (34/53)   Sin frenazo: 49% (17/35)   diferencia +16 pp, p Fisher (una cola) = 0.110
+    Con recesión: 69% alternancia (20/29)   Sin recesión: 54% (33/61)   diferencia +15 pp, p Fisher (una cola) = 0.133
+    Con frenazo: 64% alternancia (32/50)   Sin frenazo: 52% (21/40)   diferencia +12 pp, p Fisher (una cola) = 0.188
 
 ==============================================================================
 HIPÓTESIS 3: aumento del desempleo antes de la elección
@@ -101,7 +112,7 @@ HIPÓTESIS 3: aumento del desempleo antes de la elección
 3.c) Modelos logit (efectos marginales; EE agrupados por país)
     cambio 2 años                                  n= 72  dif_desemp_2a: +0.8 pp por punto (p = 0.82)
     cambio 2 años + reelección                     n= 72  dif_desemp_2a: +1.0 pp por punto (p = 0.69)
-    cambio 2 años + crec. 4a + reelección          n= 72  dif_desemp_2a: -0.5 pp por punto (p = 0.86)
+    cambio 2 años + crec. 4a + reelección          n= 72  dif_desemp_2a: -0.7 pp por punto (p = 0.81)
     cambio en el mandato (4 años) + reelección     n= 67  dif_desemp_4a: +1.8 pp por punto (p = 0.34)
     nivel de desempleo en t-1 + reelección         n= 77  desemp_t1: -0.6 pp por punto (p = 0.64)
     cambio incluyendo año electoral + reelección   n= 76  dif_desemp_2a_t0: +0.3 pp por punto (p = 0.89)

@@ -1,6 +1,6 @@
 # Crecimiento económico y alternancia en América del Sur
 
-Testea dos hipótesis con 90 elecciones presidenciales (10 países, 1983-2025):
+Testea tres hipótesis con 90 elecciones presidenciales (10 países, 1983-2025):
 
 1. **Umbral:** existe un crecimiento promedio en los 4 años previos a la elección
    por debajo del cual el partido incumbente tiende a perder.
@@ -13,7 +13,7 @@ Testea dos hipótesis con 90 elecciones presidenciales (10 países, 1983-2025):
 
 ```bash
 pip install pandas numpy statsmodels matplotlib scipy
-python construir_datos.py   # baja el PIB y arma data/base_analisis.csv
+python construir_datos.py   # baja PIB y desempleo y arma data/base_analisis.csv
 python analisis.py          # escribe resultados.txt y figuras/
 ```
 
@@ -22,155 +22,150 @@ python analisis.py          # escribe resultados.txt y figuras/
 | Archivo | Contenido |
 |---|---|
 | `data/elecciones.csv` | Base codificada a mano: incumbente, ganador, `alternancia` (1 = perdió el partido de gobierno), `presidente_candidato` (1 = el presidente en ejercicio buscaba la reelección), `caso_especial` (gobiernos interinos y elecciones anticipadas). |
-| `data/pib_crecimiento.csv` | Crecimiento del PIB real (% anual). Hasta 2022 viene del Maddison Project 2023 (vía Our World in Data); 2023 y 2024 se cargaron a mano con cifras oficiales o del FMI. Se corrigieron dos saltos de serie de Maddison con la tasa oficial: Perú 1993 (Maddison −16,6%, oficial 4,8%) y Paraguay 2002 (Maddison +15,4%, oficial 0,0%). |
-| `data/desempleo.csv` | Tasa de desempleo (% de la fuerza laboral), 1991-2025: estimación modelada de la OIT publicada por el Banco Mundial (indicador SL.UEM.TOTL.ZS). Es comparable entre países, pero no existe antes de 1991. |
+| `data/pib_crecimiento.csv` | Crecimiento del PIB real (% anual), 1978-2025. Banco Mundial, indicador NY.GDP.MKTP.KD.ZG (cuentas nacionales oficiales a precios constantes). |
+| `data/desempleo.csv` | Tasa de desempleo (% de la fuerza laboral), 1991-2025. Estimación modelada de la OIT publicada por el Banco Mundial (indicador SL.UEM.TOTL.ZS). Es comparable entre países, pero no existe antes de 1991. |
 | `data/base_analisis.csv` | Todo cruzado. |
+
+Los dos indicadores del Banco Mundial se bajan del espejo
+[datasets/world-development-indicators](https://github.com/datasets/world-development-indicators)
+en GitHub, actualizado a julio de 2026.
 
 **Convención temporal:** para una elección en el año *t* se usan los años
 calendario *t-4* a *t-1*. "Últimos 2 años" son *t-2* y *t-1*.
 
 **Qué quedó afuera:** Venezuela después de 2013 (elecciones no competitivas),
-Perú 2000 (fraude), Bolivia 2019 (anulada), Perú 2026 (sin datos de PIB 2025),
-y las primeras elecciones tras cada dictadura (no hay partido civil incumbente).
-Guyana y Surinam no están.
+Perú 2000 (fraude), Bolivia 2019 (anulada), Perú 2026 (resultado no
+incorporado), y las primeras elecciones tras cada dictadura (no hay partido
+civil incumbente). Guyana y Surinam no están.
 
 ## Resultados
 
-### Hipótesis 1: se confirma; el umbral está en torno a 4-5% anual
+### Hipótesis 1: se confirma; el umbral está en torno a 3-4% anual
 
 La alternancia es lo normal en la región: pasa en el 59% de las elecciones. Al
-ordenarlas por crecimiento promedio, la proporción baja a medida que la economía
-crece más:
+ordenarlas por crecimiento promedio, se ve un quiebre claro:
 
 | Crecimiento promedio 4 años | Alternancia |
 |---|---|
-| < 1% | 80% (16/20) |
-| 1-2% | 67% (6/9) |
-| 2-3% | 73% (8/11) |
-| 3-4% | 69% (11/16) |
-| 4-5% | 47% (9/19) |
-| > 5% | 20% (3/15) |
+| < 1% | 76% (16/21) |
+| 1-2% | 75% (6/8) |
+| 2-3% | 85% (11/13) |
+| 3-4% | 62% (8/13) |
+| 4-5% | 35% (8/23) |
+| > 5% | 33% (4/12) |
 
-El corte que mejor separa los dos grupos está en **≈ 4,5% anual**. Debajo de ese
-nivel el incumbente pierde el 72% de las veces; encima, sólo el 24%. La
-diferencia es estadísticamente significativa (p = 0,001). Para calcular ese
-p-valor se repitió todo el procedimiento 5.000 veces con los resultados
-mezclados al azar dentro de cada país, así que ya descuenta que el umbral se
-"buscó" en los datos y que algunos países alternan más que otros.
+El corte que mejor separa los dos grupos está en **≈ 3,7% anual**. Debajo de ese
+nivel el incumbente pierde el 80% de las veces; encima, el 34%. La diferencia
+es estadísticamente significativa (p < 0,001). Para calcular ese p-valor se
+repitió todo el procedimiento 5.000 veces con los resultados mezclados al azar
+dentro de cada país, y ninguna de esas repeticiones produjo una separación tan
+buena. El p-valor ya descuenta que el umbral se "buscó" en los datos y que
+algunos países alternan más que otros.
 
 **Esto es lo que plantea la hipótesis: cuando el crecimiento promedio cae debajo
-de ≈ 4,5%, la alternancia salta de 24% a 72%.** La forma de los datos también
-apoya un umbral más que una relación gradual: entre 0% y 4% la tasa de
-alternancia es bastante pareja (67% a 80%) y cae de golpe por encima de 4-5%.
-Lo llamativo es que el umbral es alto: un crecimiento "razonable" de 2-3% no
-alcanza para proteger al oficialismo.
+de ≈ 3,7%, la alternancia salta de 34% a 80%.** La forma de los datos apoya un
+umbral más que una relación gradual: entre 0% y 3% la tasa de alternancia es
+pareja (75% a 85%) y cae de golpe por encima de 4%. El gráfico de la derecha en
+`figuras/h1_umbral.png` muestra un pico claro en 3,7%.
 
 **¿Qué pasa debajo del umbral?**
 
-| Debajo de ~4,5% | Elecciones | El oficialismo pierde |
+| Debajo de ~3,7% | Elecciones | El oficialismo pierde |
 |---|---|---|
-| Todas | 65 | **72%** (47) |
-| Sin presidente candidato | 57 | **79%** (45) |
-| Con presidente candidato | 8 | 25% (2) |
+| Todas | 49 | **80%** (39) |
+| Sin presidente candidato | 42 | **88%** (37) |
+| Con presidente candidato | 7 | 29% (2) |
 
-Debajo del umbral el oficialismo pierde 7 de cada 10 veces, y 8 de cada 10 si
-el presidente no es candidato. La reelección no genera este resultado: es la
+Debajo del umbral el oficialismo pierde 8 de cada 10 veces, y casi 9 de cada 10
+si el presidente no es candidato. La reelección no genera este resultado: es la
 excepción que permitió a algunos oficialismos sobrevivir con poco crecimiento
-(Uribe 2006, Chávez 2000, 2006 y 2012, Maduro 2013, Noboa 2025). Encima del
-umbral, los 11 presidentes que fueron por la reelección ganaron.
+(Lula 2006, Chávez 2000, 2006 y 2012, Maduro 2013). Encima del umbral, los 12
+presidentes que fueron por la reelección ganaron.
 
 **¿Cambia el resultado según qué elecciones se incluyan?**
 
-| Base | Elecciones | Debajo de ~4,5% | Encima de ~4,5% | ¿Significativo? |
-|---|---|---|---|---|
-| **Todas** | 90 | pierde el 72% | pierde el 24% | **Sí** (p = 0,001) |
-| Sin interinos ni anticipadas | 75 | 73% | 21% | **Sí** (p = 0,001) |
-| Todas, ajustando por si el presidente era candidato | 90 | +28 puntos de probabilidad de perder | | **Sí** (p = 0,005) |
-| Sacando las reelecciones | 71 | 79% | 43% | No (p = 0,14) |
+| Base | Elecciones | Umbral | Debajo | Encima | ¿Significativo? |
+|---|---|---|---|---|---|
+| **Todas** | 90 | 3,7% | pierde el 80% | pierde el 34% | **Sí** (p < 0,001) |
+| Sin interinos ni anticipadas | 75 | 2,7% | 89% | 36% | **Sí** (p = 0,001) |
+| Sin reelecciones | 71 | 3,7% | 88% | 48% | **Sí** (p = 0,005) |
+| Todas, ajustando por si el presidente era candidato | 90 | 3,7% | +32 puntos de probabilidad de perder | | **Sí** (p < 0,001) |
 
-La tercera fila deja las 90 elecciones y descuenta estadísticamente el efecto
-de que el presidente sea candidato. Aun así, estar debajo del umbral suma unos
-28 puntos de probabilidad de alternancia, así que el umbral no se explica sólo
-por las reelecciones. La cuarta fila deja de ser significativa sobre todo
-porque encima del umbral quedan apenas 14 casos; la diferencia sigue siendo
-grande.
+El umbral aparece en todas las versiones, también cuando se sacan las
+reelecciones. Lo que se mueve es su ubicación exacta: entre 2,7% y 3,7% según
+qué elecciones se incluyan.
 
 Advertencias:
-* El umbral no es nítido. El gráfico de la derecha en `figuras/h1_umbral.png`
-  muestra varios picos cercanos (entre 4% y 5%). Lo más honesto es decir
-  "alrededor de 4-5%", no "4,49%".
-* Parte del efecto viene de **reelecciones presidenciales durante el boom de
-  las commodities** (Lula, Evo, Correa, Santos, Cristina); ver las tablas de
-  arriba. Que el presidente sea candidato resta unos 44 puntos de probabilidad
-  de alternancia: es el factor individual más fuerte de toda la base.
+* Lo honesto es decir "alrededor de 3-4%", no "3,73%".
+* Que el presidente sea candidato resta unos 47 puntos de probabilidad de
+  alternancia: es el factor individual más fuerte de toda la base.
 * Un modelo con escalón ajusta mejor que una curva suave, pero esa comparación
   favorece al escalón porque el corte se eligió con los mismos datos. La curva
   suave dice que cada punto de crecimiento promedio adicional reduce la
   probabilidad de alternancia en unos 7 puntos porcentuales.
 
-### Hipótesis 2: la recesión sí; la desaceleración no
+### Hipótesis 2: sólo las recesiones fuertes pesan, y casi todo lo explica el umbral
 
-Se probaron dos versiones de "economía que empeora" en los 2 años previos a la
-elección:
-* **Recesión:** al menos uno de esos dos años con crecimiento negativo.
+Se probaron tres versiones de "economía que empeora" en los 2 años previos a
+la elección:
+* **Recesión:** al menos uno de esos dos años con crecimiento negativo, aunque
+  sea mínimo.
+* **Recesión fuerte:** al menos uno de esos dos años con una caída de más de 1%.
 * **Desaceleración:** el crecimiento promedio de esos dos años es menor que el
   de los dos anteriores. Se probó con cualquier caída, y también exigiendo que
   la caída sea de más de 1, 2 o 3 puntos.
 
-**Recesión: se confirma, y con fuerza**
+**Recesión: depende de cuán fuerte sea**
 
-| | Con recesión | Sin recesión | Diferencia | ¿Significativo? |
-|---|---|---|---|---|
-| Todas las elecciones | pierde el **78%** (18/23) | 52% (35/67) | +26 puntos | **Sí** (p = 0,02) |
-| Sin interinos ni anticipadas | **83%** (15/18) | 47% (27/57) | +36 puntos | **Sí** (p = 0,007) |
-| Sin presidente candidato | **89%** (16/18) | 66% (35/53) | +23 puntos | Al límite (p = 0,05) |
+| | Con recesión | Sin recesión | ¿Significativo? |
+|---|---|---|---|
+| Cualquier año negativo, todas | pierde el 67% (20/30) | 55% (33/60) | No (p = 0,20) |
+| Caída de más de 1%, todas | **75%** (15/20) | 54% (38/70) | Al límite (p = 0,08) |
+| Caída de más de 1%, sin interinos ni anticipadas | **81%** (13/16) | 49% (29/59) | **Sí** (p = 0,02) |
+| Caída de más de 1%, sin presidente candidato | **93%** (13/14) | 67% (38/57) | **Sí** (p = 0,045) |
 
-Cuando el presidente no es candidato y hubo recesión, el oficialismo perdió 16
-de 18 veces. Las dos excepciones fueron Argentina 2003 (Kirchner, con un
-gobierno interino surgido de la crisis de 2001) y Ecuador 2017 (Moreno, con una
-caída leve de 1,2%). Con el presidente como candidato, la recesión también
-pesa: los únicos dos presidentes que perdieron la reelección en toda la base
-(Macri 2019, Bolsonaro 2022) lo hicieron después de una recesión.
+La definición "cualquier año negativo" no funciona bien porque incluye caídas
+mínimas que casi no se sienten: Paraguay 2023 (−0,03%), Brasil 2010 (−0,1%),
+Paraguay 2003 (−0,8% y −0,02%). En esos casos el oficialismo ganó. **Con
+recesiones de verdad (más de 1% de caída) el efecto es claro:** cuando el
+presidente no era candidato, el oficialismo perdió 13 de 14 veces. La única
+excepción fue Argentina 2003, con el gobierno interino de Duhalde. Con el
+presidente como candidato perdieron 2 de 6 (Macri 2019 y Bolsonaro 2022).
+
+**Pero la recesión pesa sobre todo porque baja el promedio de los 4 años**
+
+| | Con recesión fuerte | Sin recesión fuerte |
+|---|---|---|
+| Debajo de ~3,7% | pierde el 82% (14/17) | 78% (25/32) |
+| Encima de ~3,7% | 33% (1/3) | 34% (13/38) |
+
+Una vez que se sabe de qué lado del umbral está la economía, que además haya
+habido una recesión casi no cambia nada (82% contra 78%). En un modelo con el
+crecimiento promedio y la reelección, el efecto de la recesión fuerte no es
+significativo (p = 0,18). Es decir: **la recesión no parece funcionar como un
+castigo aparte; es una de las formas en que la economía cae debajo del
+umbral.**
 
 **Desaceleración sin recesión: no se confirma, en ninguna versión**
 
 | Desaceleración en los 2 años previos | Con | Sin |
 |---|---|---|
-| Cualquier caída | pierde el 63% (31/49) | 54% (22/41) |
-| Caída de más de 1 punto | 57% (20/35) | 60% (33/55) |
-| Caída de más de 2 puntos | 53% (16/30) | 62% (37/60) |
-| Caída de más de 3 puntos | 55% (11/20) | 60% (42/70) |
-| Se frenó pero siguió creciendo | 54% (15/28) | 61% (38/62) |
+| Cualquier caída | pierde el 62% (30/48) | 55% (23/42) |
+| Caída de más de 1 punto | 54% (19/35) | 62% (34/55) |
+| Caída de más de 2 puntos | 55% (16/29) | 61% (37/61) |
+| Caída de más de 3 puntos | 60% (12/20) | 59% (41/70) |
+| Se frenó pero siguió creciendo | 54% (14/26) | 61% (39/64) |
 
-Ninguna diferencia es significativa, y cuanto más fuerte la desaceleración,
-menos se nota (incluso se invierte un poco). La explicación probable: una
-desaceleración fuerte casi siempre viene después de años de mucho crecimiento
-(por ejemplo, de 7% a 3%), y esos gobiernos llegan a la elección con un
-promedio alto que los protege. **Lo que castiga el votante no es que la economía
-crezca menos que antes, sino que deje de crecer.**
-
-**Recesión y umbral juntos**
-
-| | Con recesión | Sin recesión |
-|---|---|---|
-| Debajo de ~4,5% | pierde el 81% (17/21) | 68% (30/44) |
-| Encima de ~4,5% | 50% (1/2) | 22% (5/23) |
-
-Debajo del umbral, una recesión cerca de la elección suma unos 13 puntos más de
-probabilidad de alternancia. Pero cuando se mete la recesión en un mismo modelo
-junto con el promedio de 4 años y la reelección, su efecto propio deja de ser
-significativo: las dos cosas se superponen mucho, porque una recesión baja el
-promedio. Con 90 elecciones no se puede separar bien cuánto pesa cada una.
+Ninguna diferencia es significativa. Una desaceleración fuerte suele venir
+después de años de mucho crecimiento (por ejemplo, de 7% a 3%), y esos
+gobiernos llegan a la elección con un promedio alto que los protege.
 
 Otras observaciones:
-* El crecimiento de los 2 últimos años no pesa significativamente más que el de
-  los 2 anteriores (p = 0,23 a 0,81). No hay evidencia firme de "memoria corta"
-  del votante.
-* La definición de recesión ("algún año negativo") cuenta como recesión a
-  Argentina 2011 (−5,5% en 2009, pero +11,3% en 2010). Ese caso es un rebote más
-  que una recesión, y Cristina ganó.
-* El resultado se mantiene si, para las elecciones del segundo semestre, se
-  incluye el crecimiento del propio año electoral (76% contra 51%, p = 0,03).
+* El crecimiento de los 2 últimos años no pesa más que el de los 2 anteriores
+  (p = 0,40 a 0,98). Lo que cuenta es el período completo, no los últimos años.
+  No hay evidencia de "memoria corta" del votante.
+* Incluir el crecimiento del propio año electoral para las elecciones del
+  segundo semestre no cambia las conclusiones.
 
 ### Hipótesis 3: el desempleo no agrega nada; sólo las subas grandes insinúan algo
 
@@ -195,7 +190,7 @@ significativa, tampoco con otras versiones de la variable:
 |---|---|---|
 | Cambio en los 2 años previos | +0,8 puntos de prob. de perder | No (p = 0,82) |
 | Ídem, ajustando por reelección | +1,0 | No (p = 0,69) |
-| Ídem, ajustando por reelección y crecimiento | −0,5 | No (p = 0,86) |
+| Ídem, ajustando por reelección y crecimiento | −0,7 | No (p = 0,81) |
 | Cambio a lo largo del mandato (4 años) | +1,8 | No (p = 0,34) |
 | Nivel de desempleo el año anterior | −0,6 | No (p = 0,64) |
 | Incluyendo el año electoral | +0,3 | No (p = 0,89) |
@@ -233,23 +228,25 @@ elecciones de la pandemia, cuando hubo a la vez recesión y suba del desempleo.
 
 ### En una frase
 
-Debajo de un crecimiento promedio de 4-5% el oficialismo sudamericano pierde
-la mayoría de las veces. Una recesión cerca de la elección lo complica todavía
-más; una simple desaceleración, no. El desempleo no agrega información a lo
-que ya dice el crecimiento.
+Debajo de un crecimiento promedio de 3-4% en los 4 años previos, el oficialismo
+sudamericano pierde 8 de cada 10 elecciones. Una recesión fuerte cerca de la
+elección empuja en la misma dirección, pero sobre todo porque hunde ese
+promedio. Ni una simple desaceleración ni el desempleo agregan información.
 
 ## Limitaciones
 
 * **Pocas observaciones (90).** Todos los resultados son frágiles a la
-  inclusión o exclusión de unos pocos casos.
+  inclusión o exclusión de unos pocos casos. Por ejemplo, al pasar del PIB de
+  Maddison al del Banco Mundial el umbral se movió de 4,5% a 3,7%, y la
+  recesión "cualquier año negativo" dejó de ser significativa.
 * **Codificación de la alternancia.** Hay casos discutibles (Argentina 2003,
   Brasil 1994, Colombia 2002, gobiernos interinos). Están señalados en las
   columnas `caso_especial` y `nota` de `elecciones.csv` para que se puedan
   revisar o recodificar.
-* **El PIB no es lo único.** No se controla por inflación, desempleo,
-  escándalos de corrupción ni por el ciclo de las commodities, que mueve a
-  la vez el crecimiento y la popularidad de toda la región.
-* **Datos de 2023-2024** cargados a mano: conviene verificarlos contra el
-  WEO del FMI o los bancos centrales antes de citar los números.
-* Maddison mide el PIB en paridad de poder de compra. Sus tasas pueden diferir
-  algunas décimas de las cuentas nacionales oficiales.
+* **El PIB no es lo único.** No se controla por inflación, escándalos de
+  corrupción ni por el ciclo de las commodities, que mueve a la vez el
+  crecimiento y la popularidad de toda la región.
+* **Datos recientes.** Las cifras de 2024 y 2025 del Banco Mundial todavía
+  pueden revisarse. Afectan a Uruguay 2024, Chile 2025, Bolivia 2025 y
+  Ecuador 2025. Bolivia 2025 en particular queda apenas encima del umbral
+  (3,8%) y el oficialismo perdió.

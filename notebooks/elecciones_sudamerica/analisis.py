@@ -179,16 +179,25 @@ def h2(d, d_sin_esp):
     p("=" * 78)
     p("  Definiciones:")
     p("   - recesión  = al menos uno de los dos años previos con crecimiento negativo")
+    p("   - recesión fuerte = al menos uno de los dos años previos con caída de más de 1%")
     p("   - frenazo   = crecimiento promedio de los 2 últimos años menor que el de los 2 anteriores")
 
     for etiqueta, dd in (("todas", d), ("sin interinos ni anticipadas", d_sin_esp)):
         p(f"\n2.a) Comparación simple [{etiqueta}, n={len(dd)}]")
         tabla_2x2(dd, "recesion_ult2", "recesión")
+        tabla_2x2(dd, "recesion_fuerte", "recesión fuerte")
         tabla_2x2(dd, "frenazo", "frenazo")
+    sin_cand = d[d.presidente_candidato == 0]
+    p(f"\n2.a) Comparación simple [sin presidente candidato, n={len(sin_cand)}]")
+    tabla_2x2(sin_cand, "recesion_ult2", "recesión")
+    tabla_2x2(sin_cand, "recesion_fuerte", "recesión fuerte")
 
     p("\n2.b) Modelos logit (efectos marginales en puntos porcentuales; EE agrupados por país)")
     especs = {
         "M1 recesión": "alternancia ~ recesion_ult2",
+        "M1b recesión fuerte": "alternancia ~ recesion_fuerte",
+        "M1c recesión fuerte + crec. 4a + reelección":
+            "alternancia ~ recesion_fuerte + crec_4a + presidente_candidato",
         "M2 frenazo": "alternancia ~ frenazo",
         "M3 ambos + crec. 4a + reelección":
             "alternancia ~ recesion_ult2 + frenazo + crec_4a + presidente_candidato",
@@ -200,8 +209,11 @@ def h2(d, d_sin_esp):
         for nombre, f in especs.items():
             m = logit_cluster(f, dd)
             vars_ = [v for v in m.params.index if v != "Intercept"]
-            txt = ", ".join(f"{v} {efecto_marginal(m, v)[0]*100:+.1f}pp (p={efecto_marginal(m, v)[1]:.2f})"
-                            for v in vars_)
+            efectos = [efecto_marginal(m, v) for v in vars_]
+            if any(abs(em) > 1 or np.isnan(pv) for em, pv in efectos):
+                p(f"    {nombre:<48} no estimable (separación perfecta: muy pocos casos)")
+                continue
+            txt = ", ".join(f"{v} {em*100:+.1f}pp (p={pv:.2f})" for v, (em, pv) in zip(vars_, efectos))
             p(f"    {nombre:<48} {txt}")
         m = logit_cluster(especs["M4 continuo: niveles últ.2 y prim.2 + reelección"], dd)
         w = m.wald_test("crec_ult2 = crec_prim2", scalar=True)
