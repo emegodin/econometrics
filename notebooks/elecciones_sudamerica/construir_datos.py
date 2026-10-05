@@ -9,10 +9,17 @@ datasets/world-development-indicators en GitHub)
   (PIB a precios constantes, cuentas nacionales oficiales).
 * Desempleo (% de la fuerza laboral), 1991-2025: SL.UEM.TOTL.ZS
   (estimación modelada de la OIT).
+* Corrupción del Poder Ejecutivo (índice 0-1, más alto = más corrupción):
+  V-Dem v16, variable v2x_execorr, vía el repositorio vdeminstitute/vdemdata.
+* Escándalos judiciales: data/escandalos.csv, codificado a mano.
 
-Salida: data/pib_crecimiento.csv, data/desempleo.csv y data/base_analisis.csv
+Salida: data/pib_crecimiento.csv, data/desempleo.csv, data/vdem_corrupcion.csv
+y data/base_analisis.csv
 """
 from pathlib import Path
+
+import tempfile
+import urllib.request
 
 import pandas as pd
 
@@ -32,6 +39,20 @@ def serie_wdi(indicador, nombre):
     return w[["pais", "anio", nombre]].dropna().sort_values(["pais", "anio"]).reset_index(drop=True)
 
 
+URL_VDEM = "https://raw.githubusercontent.com/vdeminstitute/vdemdata/master/data/vdem.RData"
+
+
+def serie_vdem():
+    """Índice de corrupción del Ejecutivo de V-Dem (requiere `pip install pyreadr`)."""
+    import pyreadr
+    with tempfile.NamedTemporaryFile(suffix=".RData") as tmp:
+        urllib.request.urlretrieve(URL_VDEM, tmp.name)
+        v = next(iter(pyreadr.read_r(tmp.name).values()))
+    v = v[v.country_text_id.isin(ISO) & (v.year >= 1975)]
+    v = v.assign(pais=v.country_text_id.map(ISO), anio=v.year.astype(int))
+    return v[["pais", "anio", "v2x_execorr"]].rename(columns={"v2x_execorr": "corrupcion_ejec"})
+
+
 def serie_crecimiento():
     return serie_wdi("ny.gdp.mktp.kd.zg", "crecimiento")
 
@@ -39,10 +60,11 @@ def serie_crecimiento():
 def serie_desempleo():
     return serie_wdi("sl.uem.totl.zs", "desempleo")
 
-def armar_base(elec, g, u):
+def armar_base(elec, g, u, v):
     """Para una elección en el año t usa los años calendario t-4 ... t-1."""
     tasa = g.set_index(["pais", "anio"]).crecimiento
     des = u.set_index(["pais", "anio"]).desempleo
+    cor = v.set_index(["pais", "anio"]).corrupcion_ejec
     filas = []
     for _, e in elec.iterrows():
         t = e.anio
@@ -70,6 +92,9 @@ def armar_base(elec, g, u):
             # Robustez para elecciones del 2º semestre: incluye el año electoral
             "dif_desemp_2a_t0": des.get((e.pais, t)) - des.get((e.pais, t - 2))
             if (e.pais, t - 2) in des.index and (e.pais, t) in des.index else None,
+            # Hipótesis 4: corrupción del Ejecutivo según V-Dem
+            "corrupcion_t1": cor.get((e.pais, t - 1)),
+            "dif_corrupcion_4a": cor.get((e.pais, t - 1)) - cor.get((e.pais, t - 5)),
         })
     base = pd.concat([elec.reset_index(drop=True), pd.DataFrame(filas)], axis=1)
     base["desaceleracion"] = base.crec_ult2 - base.crec_prim2  # <0 = se frenó
@@ -82,8 +107,12 @@ if __name__ == "__main__":
     g.to_csv(DATA / "pib_crecimiento.csv", index=False, float_format="%.3f")
     u = serie_desempleo()
     u.to_csv(DATA / "desempleo.csv", index=False, float_format="%.3f")
+    v = serie_vdem()
+    v.to_csv(DATA / "vdem_corrupcion.csv", index=False, float_format="%.3f")
     elec = pd.read_csv(DATA / "elecciones.csv")
-    base = armar_base(elec, g, u)
+    esc = pd.read_csv(DATA / "escandalos.csv").drop(columns="descripcion")
+    elec = elec.merge(esc, on=["pais", "anio"], how="left", validate="1:1")
+    base = armar_base(elec, g, u, v)
     faltan = base[base.crec_4a.isna()]
     assert faltan.empty, f"Faltan datos de PIB para:\n{faltan[['pais', 'anio']]}"
     base.to_csv(DATA / "base_analisis.csv", index=False, float_format="%.3f")

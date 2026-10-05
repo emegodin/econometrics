@@ -129,3 +129,61 @@ HIPÓTESIS 3: aumento del desempleo antes de la elección
     Peru 2021: +3.7 pts -> perdió el oficialismo [interino]
     Ecuador 2021: +2.6 pts -> perdió el oficialismo
     Colombia 2022: +3.6 pts -> perdió el oficialismo
+
+==============================================================================
+HIPÓTESIS 4: escándalos judiciales durante el mandato
+==============================================================================
+  escandalo_presidente = investigación formal que involucra al presidente o a su familia directa
+  escandalo_gobierno   = ídem, o a ministros, vicepresidente o dirigentes del partido de gobierno
+
+4.a) Comparación simple [todas, n=90]
+    Con escándalo del presidente: 93% alternancia (14/15)   Sin escándalo del presidente: 52% (39/75)   diferencia +41 pp, p Fisher (una cola) = 0.002
+    Con escándalo en el gobierno: 60% alternancia (29/48)   Sin escándalo en el gobierno: 57% (24/42)   diferencia +3 pp, p Fisher (una cola) = 0.460
+    Con escándalo sólo en el gobierno (vs. ninguno): 45% alternancia (15/33)   Sin escándalo sólo en el gobierno (vs. ninguno): 57% (24/42)   diferencia -12 pp, p Fisher (una cola) = 0.892
+
+4.a) Comparación simple [sin interinos ni anticipadas, n=75]
+    Con escándalo del presidente: 92% alternancia (11/12)   Sin escándalo del presidente: 49% (31/63)   diferencia +42 pp, p Fisher (una cola) = 0.006
+    Con escándalo en el gobierno: 56% alternancia (23/41)   Sin escándalo en el gobierno: 56% (19/34)   diferencia +0 pp, p Fisher (una cola) = 0.585
+    Con escándalo sólo en el gobierno (vs. ninguno): 41% alternancia (12/29)   Sin escándalo sólo en el gobierno (vs. ninguno): 56% (19/34)   diferencia -15 pp, p Fisher (una cola) = 0.920
+
+4.a) Comparación simple [sin presidente candidato, n=71]
+    Con escándalo del presidente: 92% alternancia (12/13)   Sin escándalo del presidente: 67% (39/58)   diferencia +25 pp, p Fisher (una cola) = 0.063
+    Con escándalo en el gobierno: 77% alternancia (27/35)   Sin escándalo en el gobierno: 67% (24/36)   diferencia +10 pp, p Fisher (una cola) = 0.237
+    Con escándalo sólo en el gobierno (vs. ninguno): 68% alternancia (15/22)   Sin escándalo sólo en el gobierno (vs. ninguno): 67% (24/36)   diferencia +2 pp, p Fisher (una cola) = 0.570
+
+4.a) Comparación simple [sin casos de certeza baja, n=72]
+    Con escándalo del presidente: 93% alternancia (14/15)   Sin escándalo del presidente: 58% (33/57)   diferencia +35 pp, p Fisher (una cola) = 0.008
+    Con escándalo en el gobierno: 66% alternancia (29/44)   Sin escándalo en el gobierno: 64% (18/28)   diferencia +2 pp, p Fisher (una cola) = 0.543
+    Con escándalo sólo en el gobierno (vs. ninguno): 52% alternancia (15/29)   Sin escándalo sólo en el gobierno (vs. ninguno): 64% (18/28)   diferencia -13 pp, p Fisher (una cola) = 0.891
+
+4.b) Escándalo del presidente y umbral de crecimiento (3.73%)
+    debajo del umbral, con escándalo :   92% (11/12)
+    debajo del umbral, sin escándalo :   76% (28/37)
+    encima del umbral, con escándalo :  100% (3/3)
+    encima del umbral, sin escándalo :   29% (11/38)
+    Crecimiento promedio 4 años: con escándalo del presidente 1.5%, sin escándalo 3.2%
+
+4.c) Modelos logit (efectos marginales; EE agrupados por país)
+    escándalo del presidente                                       +55.9 pp (p = 0.01)
+    ídem + umbral + reelección                                     +37.1 pp (p = 0.08)
+    ídem + crec. 4a (continuo) + reelección                        +43.3 pp (p = 0.11)
+    escándalo en el gobierno + umbral + reelección                 +8.7 pp (p = 0.27)
+    V-Dem: nivel de corrupción del Ejecutivo + umbral + reelección -20.6 pp (de 0 a 1 en el índice) (p = 0.28)
+    V-Dem: cambio en el mandato + umbral + reelección              +41.9 pp (de 0 a 1 en el índice) (p = 0.36)
+
+4.d) Elecciones con escándalo del presidente
+    Brasil 1989: crec. 4a 4.7% -> perdió el oficialismo
+    Venezuela 1993: crec. 4a 2.1% -> perdió el oficialismo
+    Colombia 1998: crec. 4a 4.1% -> perdió el oficialismo
+    Paraguay 2003: crec. 4a -1.1% -> ganó el oficialismo
+    Argentina 2015: crec. 4a 1.2% -> perdió el oficialismo
+    Peru 2016: crec. 4a 4.4% -> perdió el oficialismo
+    Chile 2017: crec. 4a 2.3% -> perdió el oficialismo
+    Brasil 2018: crec. 4a -1.2% -> perdió el oficialismo
+    Colombia 2018: crec. 4a 2.7% -> perdió el oficialismo
+    Argentina 2019: crec. 4a 0.2% -> perdió el oficialismo
+    Chile 2021: crec. 4a -0.0% -> perdió el oficialismo
+    Ecuador 2021: crec. 4a -0.5% -> perdió el oficialismo
+    Brasil 2022: crec. 4a 1.1% -> perdió el oficialismo
+    Argentina 2023: crec. 4a 1.1% -> perdió el oficialismo
+    Ecuador 2023: crec. 4a 1.6% -> perdió el oficialismo

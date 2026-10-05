@@ -7,6 +7,9 @@ H2: una desaceleración o una recesión en los 2 años previos aumenta la
     probabilidad de que el incumbente pierda.
 H3: un aumento del desempleo antes de la elección aumenta la probabilidad de
     que el incumbente pierda (sólo elecciones desde 1994, por los datos).
+H4: los escándalos judiciales durante el mandato aumentan la probabilidad de
+    que el incumbente pierda (codificación manual + corrupción del Ejecutivo
+    según V-Dem).
 
 Correr primero construir_datos.py. Escribe resultados.txt y figuras en figuras/.
 """
@@ -343,13 +346,66 @@ def graf_h3(d):
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- escándalos (H4)
+def h4(d, umbral):
+    p("\n" + "=" * 78)
+    p("HIPÓTESIS 4: escándalos judiciales durante el mandato")
+    p("=" * 78)
+    p("  escandalo_presidente = investigación formal que involucra al presidente o a su familia directa")
+    p("  escandalo_gobierno   = ídem, o a ministros, vicepresidente o dirigentes del partido de gobierno")
+    d = d.assign(debajo=(d.crec_4a < umbral).astype(int),
+                 solo_gobierno=((d.escandalo_gobierno == 1) & (d.escandalo_presidente == 0)).astype(int))
+
+    for etiqueta, dd in (("todas", d), ("sin interinos ni anticipadas", d[d.caso_especial.isna()]),
+                         ("sin presidente candidato", d[d.presidente_candidato == 0]),
+                         ("sin casos de certeza baja", d[d.certeza != "baja"])):
+        p(f"\n4.a) Comparación simple [{etiqueta}, n={len(dd)}]")
+        tabla_2x2(dd, "escandalo_presidente", "escándalo del presidente")
+        tabla_2x2(dd, "escandalo_gobierno", "escándalo en el gobierno")
+        tabla_2x2(dd[dd.escandalo_presidente == 0], "solo_gobierno",
+                  "escándalo sólo en el gobierno (vs. ninguno)")
+
+    p(f"\n4.b) Escándalo del presidente y umbral de crecimiento ({umbral:.2f}%)")
+    for deb, lado in ((1, "debajo"), (0, "encima")):
+        for v, nombre in ((1, "con escándalo"), (0, "sin escándalo")):
+            x = d[(d.debajo == deb) & (d.escandalo_presidente == v)].alternancia
+            p(f"    {lado} del umbral, {nombre:<14}: {x.mean():5.0%} ({x.sum()}/{len(x)})")
+    p(f"    Crecimiento promedio 4 años: con escándalo del presidente {d[d.escandalo_presidente == 1].crec_4a.mean():.1f}%, "
+      f"sin escándalo {d[d.escandalo_presidente == 0].crec_4a.mean():.1f}%")
+
+    p("\n4.c) Modelos logit (efectos marginales; EE agrupados por país)")
+    especs = [
+        ("escándalo del presidente", "alternancia ~ escandalo_presidente", "escandalo_presidente"),
+        ("ídem + umbral + reelección",
+         "alternancia ~ escandalo_presidente + debajo + presidente_candidato", "escandalo_presidente"),
+        ("ídem + crec. 4a (continuo) + reelección",
+         "alternancia ~ escandalo_presidente + crec_4a + presidente_candidato", "escandalo_presidente"),
+        ("escándalo en el gobierno + umbral + reelección",
+         "alternancia ~ escandalo_gobierno + debajo + presidente_candidato", "escandalo_gobierno"),
+        ("V-Dem: nivel de corrupción del Ejecutivo + umbral + reelección",
+         "alternancia ~ corrupcion_t1 + debajo + presidente_candidato", "corrupcion_t1"),
+        ("V-Dem: cambio en el mandato + umbral + reelección",
+         "alternancia ~ dif_corrupcion_4a + debajo + presidente_candidato", "dif_corrupcion_4a"),
+    ]
+    for nombre, f, v in especs:
+        m = logit_cluster(f, d)
+        em, pv = efecto_marginal(m, v)
+        unidad = " (de 0 a 1 en el índice)" if v.startswith(("corr", "dif_corr")) else ""
+        p(f"    {nombre:<62} {em*100:+.1f} pp{unidad} (p = {pv:.2f})")
+
+    p("\n4.d) Elecciones con escándalo del presidente")
+    for _, r in d[d.escandalo_presidente == 1].sort_values("anio").iterrows():
+        p(f"    {r.pais} {r.anio}: crec. 4a {r.crec_4a:.1f}% -> "
+          f"{'perdió' if r.alternancia else 'ganó'} el oficialismo")
+
 if __name__ == "__main__":
     d = pd.read_csv(AQUI / "data" / "base_analisis.csv")
     d_sin_esp = d[d.caso_especial.isna()].copy()
     p(f"Base: {len(d)} elecciones presidenciales, 10 países, {d.anio.min()}-{d.anio.max()}")
     p(f"Alternancia promedio: {d.alternancia.mean():.0%}. "
       f"Casos especiales (interinos/anticipadas): {d.caso_especial.notna().sum()}")
-    h1(d, d_sin_esp)
+    umbral = h1(d, d_sin_esp)
     h2(d, d_sin_esp)
     h3(d)
+    h4(d, umbral)
     (AQUI / "resultados.txt").write_text("\n".join(salida) + "\n", encoding="utf-8")

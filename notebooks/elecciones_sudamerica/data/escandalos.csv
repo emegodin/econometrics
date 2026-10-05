@@ -1,0 +1,91 @@
+pais,anio,escandalo_presidente,escandalo_gobierno,certeza,descripcion
+Argentina,1989,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Alfonsin
+Argentina,1995,0,1,alta,Yomagate (1991) y caso IBM-Banco Nacion (1994-95)
+Argentina,1999,0,1,alta,Venta ilegal de armas a Ecuador y Croacia (investigacion desde 1995); IBM-Banco Nacion
+Argentina,2003,0,0,media,El escandalo de sobornos en el Senado (2000) es del gobierno de la Alianza; no del PJ incumbente
+Argentina,2007,0,1,alta,Caso Skanska (2007); bolsa con dinero de la ministra Miceli (2007)
+Argentina,2011,0,1,alta,Valija de Antonini Wilson (2007); causas contra el secretario de Transporte Jaime; Suenos Compartidos (2011)
+Argentina,2015,1,1,alta,Boudou procesado por Ciccone (2014); Hotesur (2014); denuncia de Nisman contra la presidenta (2015)
+Argentina,2019,1,1,alta,Panama Papers con investigacion judicial a Macri (2016); Correo Argentino (2017); aportantes truchos (2018)
+Argentina,2023,1,1,alta,Vacunatorio VIP (2021); fiesta en Olivos con causa judicial contra el presidente (2021)
+Bolivia,1985,0,0,media,Sin escandalo judicial de alto perfil identificado
+Bolivia,1989,0,0,baja,Caso Huanchaca (1986): vinculos con narcotrafico investigados por el Congreso; participacion del gobierno no establecida
+Bolivia,1993,0,1,media,Narcovinculos del MIR: renuncia del ministro del Interior y del jefe de policia por presion de EEUU (1991)
+Bolivia,1997,0,0,media,Sin escandalo judicial de alto perfil identificado
+Bolivia,2002,0,0,baja,Sin escandalo judicial de alto perfil identificado
+Bolivia,2005,0,0,media,Gobierno de transicion; los juicios a Sanchez de Lozada corresponden al gobierno anterior
+Bolivia,2009,0,1,alta,Caso YPFB: detencion del presidente de la petrolera estatal Santos Ramirez por sobornos (2009)
+Bolivia,2014,0,1,baja,Red de extorsion en el Ministerio de Gobierno (2012)
+Bolivia,2020,0,1,alta,Sobreprecio de respiradores: detencion del ministro de Salud (2020)
+Bolivia,2025,0,0,baja,Acusaciones politicas contra los hijos de Arce sin causa judicial de alto perfil identificada
+Brasil,1989,1,1,media,CPI de la Corrupcion (1988) que pidio el juicio politico de Sarney
+Brasil,1994,0,0,media,CPI de los Enanos del Presupuesto (1993-94): involucra al Congreso; no al gobierno de Itamar
+Brasil,1998,0,1,alta,Compra de votos para la enmienda de reeleccion (1997); caso Sivam (1995)
+Brasil,2002,0,1,media,Investigacion a Eduardo Jorge (ex secretario general de la Presidencia; 2000); Sudam (2001)
+Brasil,2006,0,1,alta,Mensalao (2005)
+Brasil,2010,0,1,alta,Erenice Guerra: renuncia de la jefa de Gabinete por trafico de influencias (septiembre 2010)
+Brasil,2014,0,1,alta,Lava Jato y Petrobras (desde marzo 2014)
+Brasil,2018,1,1,alta,Grabaciones de JBS y dos denuncias de la Fiscalia General contra Temer (2017)
+Brasil,2022,1,1,alta,CPI de la Covid recomienda imputar a Bolsonaro (2021); rachadinhas de Flavio Bolsonaro; sobornos en el MEC (2022)
+Chile,1993,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Aylwin
+Chile,1999,0,0,baja,Caso Codelco-Davila (1994) en la empresa estatal; sin involucrar al gobierno
+Chile,2005,0,1,alta,MOP-Gate y sobresueldos (2002-03); caso coimas (2002)
+Chile,2009,0,1,alta,Chiledeportes (2006)
+Chile,2013,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Pinera
+Chile,2017,1,1,alta,Caso Caval: hijo y nuera de Bachelet (2015); financiamiento irregular SQM/Penta
+Chile,2021,1,1,alta,Pandora Papers y venta de Dominga: investigacion fiscal y acusacion constitucional contra Pinera (octubre-noviembre 2021)
+Chile,2025,0,1,alta,Caso Convenios/Democracia Viva (2023); caso Monsalve (2024)
+Colombia,1986,0,0,media,Sin escandalo de corrupcion de alto perfil en el gobierno de Betancur
+Colombia,1990,0,0,media,Sin escandalo de corrupcion de alto perfil en el gobierno de Barco
+Colombia,1994,0,0,baja,Fuga de Escobar de La Catedral (1992): investigaciones a funcionarios; no es un caso de corrupcion del gobierno
+Colombia,1998,1,1,alta,Proceso 8000: financiamiento narco de la campana de Samper
+Colombia,2002,0,1,media,Caso Dragacol (1999-2000)
+Colombia,2006,0,1,media,Escandalo del DAS: vinculos de su director Jorge Noguera con paramilitares (abril 2006)
+Colombia,2010,0,1,alta,Parapolitica; Yidispolitica (2008); chuzadas del DAS (2009); Agro Ingreso Seguro (2009)
+Colombia,2014,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Santos antes de 2014
+Colombia,2018,1,1,alta,Odebrecht: financiamiento de la campana de Santos de 2014 (2017)
+Colombia,2022,0,1,alta,Centros Poblados en MinTIC (2021); Uribe (lider del Centro Democratico) investigado por manipulacion de testigos (2020)
+Ecuador,1984,0,0,media,Sin escandalo judicial de alto perfil identificado
+Ecuador,1988,0,0,baja,Denuncias de derechos humanos (caso Restrepo); sin causa de corrupcion de alto perfil antes de la eleccion
+Ecuador,1992,0,0,media,Sin escandalo judicial de alto perfil identificado
+Ecuador,1996,0,1,alta,El vicepresidente Dahik huye del pais tras orden judicial por corrupcion (1995)
+Ecuador,1998,0,0,media,Los casos contra Bucaram corresponden al PRE; no al gobierno interino de Alarcon
+Ecuador,2002,0,1,media,Financiamiento de la campana de Mahuad (DP) por el Banco del Progreso (1999)
+Ecuador,2006,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Palacio
+Ecuador,2009,0,0,media,Los contratos de Fabricio Correa salen a la luz en junio de 2009; despues de la eleccion
+Ecuador,2013,0,1,media,Contratos de Fabricio Correa (2009); caso Pedro Delgado (primo del presidente; titulo falso; diciembre 2012)
+Ecuador,2017,0,1,alta,Caso Petroecuador (2016); Odebrecht (diciembre 2016)
+Ecuador,2021,1,1,alta,INA Papers con investigacion al presidente Moreno (2019); corrupcion en hospitales durante la pandemia (2020)
+Ecuador,2023,1,1,alta,Caso El Encuentro (cunado de Lasso; enero 2023) y juicio politico por peculado (mayo 2023)
+Ecuador,2025,0,0,baja,Sin escandalo judicial de alto perfil identificado en el gobierno de Noboa
+Paraguay,1993,0,0,baja,Sin escandalo judicial de alto perfil identificado
+Paraguay,1998,0,0,baja,Las causas contra Wasmosy prosperan despues de su mandato
+Paraguay,2003,1,1,alta,Desvio de 16 millones de dolares del Banco Central y BMW robado; intento de juicio politico a Gonzalez Macchi
+Paraguay,2008,0,0,media,Sin escandalo judicial de alto perfil identificado
+Paraguay,2013,0,0,media,Sin escandalo judicial de alto perfil en el gobierno de Franco
+Paraguay,2018,0,0,baja,Sin escandalo judicial de alto perfil que involucre al gobierno de Cartes
+Paraguay,2023,0,1,alta,Acta secreta de Itaipu (2019); EEUU designa como corruptos a Cartes (lider colorado) y al vicepresidente Velazquez (2022)
+Peru,1985,0,0,media,Sin escandalo judicial de alto perfil identificado
+Peru,1990,0,0,baja,Denuncias de corrupcion contra el gobierno de Garcia; las investigaciones formales son posteriores (1991)
+Peru,1995,0,0,media,La red de Montesinos no era publica todavia
+Peru,2001,0,0,media,Los vladivideos corresponden al gobierno de Fujimori; no al gobierno de transicion de Paniagua
+Peru,2006,0,1,alta,Firmas falsas de Peru Posible (2003)
+Peru,2011,0,1,alta,Petroaudios (2008): renuncia del gabinete
+Peru,2016,1,1,alta,Agendas de Nadine Heredia (esposa de Humala) e investigacion por lavado de activos (2015)
+Peru,2021,0,1,alta,Vacunagate (febrero 2021): renuncian las ministras de Salud y de Relaciones Exteriores
+Uruguay,1989,0,0,media,Sin escandalo judicial de alto perfil identificado
+Uruguay,1994,0,0,baja,Denuncias sobre privatizaciones y bancos; los procesamientos son posteriores a la eleccion
+Uruguay,1999,0,0,media,Sin escandalo judicial de alto perfil identificado
+Uruguay,2004,0,0,media,La crisis bancaria de 2002 involucra a bancos privados; no al gobierno
+Uruguay,2009,0,0,media,Sin escandalo judicial de alto perfil identificado
+Uruguay,2014,0,1,baja,Caso Pluna: investigacion judicial sobre el aval estatal (2012-13)
+Uruguay,2019,0,1,alta,Renuncia del vicepresidente Sendic por el uso de la tarjeta de ANCAP (2017)
+Uruguay,2024,0,1,alta,Caso Astesiano (jefe de custodia del presidente; 2022); pasaporte de Marset (2022-23); caso Penades (2023)
+Venezuela,1983,0,0,media,Sin escandalo judicial de alto perfil identificado
+Venezuela,1988,0,0,baja,El escandalo de RECADI estalla en 1989; despues de la eleccion
+Venezuela,1993,1,1,alta,Juicio politico y destitucion de Carlos Andres Perez por malversacion de la partida secreta (1993)
+Venezuela,1998,0,0,media,La crisis bancaria de 1994 involucra a bancos privados
+Venezuela,2000,0,0,media,Sin escandalo judicial de alto perfil identificado
+Venezuela,2006,0,0,baja,Sin escandalo judicial de alto perfil identificado
+Venezuela,2012,0,1,baja,Valija de Antonini Wilson (2007); alimentos podridos de PDVAL (2010)
+Venezuela,2013,0,1,baja,Mismos casos que en 2012
