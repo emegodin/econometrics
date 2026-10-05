@@ -5,6 +5,8 @@ H1: existe un umbral de crecimiento promedio (4 años previos) por debajo del
     cual se dispara la alternancia del partido incumbente.
 H2: una desaceleración o una recesión en los 2 años previos aumenta la
     probabilidad de que el incumbente pierda.
+H3: un aumento del desempleo antes de la elección aumenta la probabilidad de
+    que el incumbente pierda (sólo elecciones desde 1994, por los datos).
 
 Correr primero construir_datos.py. Escribe resultados.txt y figuras en figuras/.
 """
@@ -251,6 +253,84 @@ def graf_h2(d):
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- desempleo (H3)
+def h3(d):
+    p("\n" + "=" * 78)
+    p("HIPÓTESIS 3: aumento del desempleo antes de la elección")
+    p("=" * 78)
+    d = d.dropna(subset=["dif_desemp_2a"]).copy()
+    p(f"  Elecciones con datos de desempleo (1994 en adelante): {len(d)}, "
+      f"alternancia promedio {d.alternancia.mean():.0%}")
+    p("  Variable principal: cambio en la tasa de desempleo entre t-3 y t-1 (puntos porcentuales)")
+
+    p("\n3.a) Alternancia según cuánto subió el desempleo en los 2 años previos")
+    tramos = pd.cut(d.dif_desemp_2a, [-np.inf, -1, 0, 1, 2, np.inf],
+                    labels=["bajó > 1 pt", "bajó hasta 1 pt", "subió hasta 1 pt",
+                            "subió 1-2 pts", "subió > 2 pts"])
+    t = d.groupby(tramos, observed=True).alternancia.agg(["mean", "sum", "count"])
+    for k, r in t.iterrows():
+        p(f"    {k:>16}: {r['mean']:5.0%}  ({int(r['sum'])}/{int(r['count'])})")
+
+    sin_esp = d[d.caso_especial.isna()]
+    sin_cand = d[d.presidente_candidato == 0]
+    for etiqueta, dd in (("todas", d), ("sin interinos ni anticipadas", sin_esp),
+                         ("sin presidente candidato", sin_cand)):
+        p(f"\n3.b) Comparación simple [{etiqueta}, n={len(dd)}]")
+        for k in (0, 1, 2):
+            dd = dd.assign(subio=(dd.dif_desemp_2a > k).astype(int))
+            tabla_2x2(dd, "subio", f"suba > {k} pts")
+
+    p("\n3.c) Modelos logit (efectos marginales; EE agrupados por país)")
+    especs = [
+        ("cambio 2 años", "alternancia ~ dif_desemp_2a", "dif_desemp_2a"),
+        ("cambio 2 años + reelección", "alternancia ~ dif_desemp_2a + presidente_candidato", "dif_desemp_2a"),
+        ("cambio 2 años + crec. 4a + reelección",
+         "alternancia ~ dif_desemp_2a + crec_4a + presidente_candidato", "dif_desemp_2a"),
+        ("cambio en el mandato (4 años) + reelección",
+         "alternancia ~ dif_desemp_4a + presidente_candidato", "dif_desemp_4a"),
+        ("nivel de desempleo en t-1 + reelección",
+         "alternancia ~ desemp_t1 + presidente_candidato", "desemp_t1"),
+        ("cambio incluyendo año electoral + reelección",
+         "alternancia ~ dif_desemp_2a_t0 + presidente_candidato", "dif_desemp_2a_t0"),
+    ]
+    base = pd.read_csv(AQUI / "data" / "base_analisis.csv")
+    for nombre, f, v in especs:
+        dd = base.dropna(subset=[v])
+        m = logit_cluster(f, dd)
+        em, pv = efecto_marginal(m, v)
+        p(f"    {nombre:<46} n={len(dd):3d}  {v}: {em*100:+.1f} pp por punto (p = {pv:.2f})")
+    p(f"\n    Correlación entre cambio del desempleo y crecimiento de los 2 años previos: "
+      f"{np.corrcoef(d.dif_desemp_2a, d.crec_ult2)[0, 1]:.2f}")
+
+    p("\n3.d) Casos con suba del desempleo de más de 2 puntos")
+    for _, r in d[d.dif_desemp_2a > 2].sort_values("anio").iterrows():
+        p(f"    {r.pais} {r.anio}: +{r.dif_desemp_2a:.1f} pts -> "
+          f"{'perdió' if r.alternancia else 'ganó'} el oficialismo"
+          f"{' (presidente candidato)' if r.presidente_candidato else ''}"
+          f"{' [' + r.caso_especial + ']' if isinstance(r.caso_especial, str) else ''}")
+
+    graf_h3(d)
+
+
+def graf_h3(d):
+    fig, ax = plt.subplots(figsize=(7.5, 4.6))
+    jit = RNG.uniform(-0.04, 0.04, len(d))
+    colores = np.where(d.alternancia == 1, "#c0392b", "#2471a3")
+    ax.scatter(d.dif_desemp_2a, d.alternancia + jit, c=colores, alpha=0.7, s=28)
+    m = smf.logit("alternancia ~ dif_desemp_2a", d).fit(disp=0)
+    xx = np.linspace(d.dif_desemp_2a.min(), d.dif_desemp_2a.max(), 200)
+    ax.plot(xx, m.predict(pd.DataFrame({"dif_desemp_2a": xx})), color="k", lw=1.5,
+            label="Prob. estimada (logit)")
+    ax.axvline(0, color="gray", lw=0.8, ls="--")
+    ax.set_xlabel("Cambio del desempleo en los 2 años previos (puntos porcentuales)")
+    ax.set_ylabel("Alternancia (1) / Continuidad (0)")
+    ax.set_title("Desempleo y alternancia (elecciones 1994-2025)")
+    ax.legend(loc="center right", fontsize=8)
+    fig.tight_layout()
+    fig.savefig(FIG / "h3_desempleo.png", dpi=130)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     d = pd.read_csv(AQUI / "data" / "base_analisis.csv")
     d_sin_esp = d[d.caso_especial.isna()].copy()
@@ -259,4 +339,5 @@ if __name__ == "__main__":
       f"Casos especiales (interinos/anticipadas): {d.caso_especial.notna().sum()}")
     h1(d, d_sin_esp)
     h2(d, d_sin_esp)
+    h3(d)
     (AQUI / "resultados.txt").write_text("\n".join(salida) + "\n", encoding="utf-8")

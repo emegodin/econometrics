@@ -69,3 +69,52 @@ HIPÓTESIS 2: desaceleración o recesión en los 2 años previos
 2.c) Robustez: elecciones del 2º semestre usando también el año electoral
     Con recesión: 76% alternancia (19/25)   Sin recesión: 51% (32/63)   diferencia +25 pp, p Fisher (una cola) = 0.026
     Con frenazo: 64% alternancia (34/53)   Sin frenazo: 49% (17/35)   diferencia +16 pp, p Fisher (una cola) = 0.110
+
+==============================================================================
+HIPÓTESIS 3: aumento del desempleo antes de la elección
+==============================================================================
+  Elecciones con datos de desempleo (1994 en adelante): 72, alternancia promedio 54%
+  Variable principal: cambio en la tasa de desempleo entre t-3 y t-1 (puntos porcentuales)
+
+3.a) Alternancia según cuánto subió el desempleo en los 2 años previos
+         bajó > 1 pt:   46%  (6/13)
+     bajó hasta 1 pt:   50%  (11/22)
+    subió hasta 1 pt:   65%  (13/20)
+       subió 1-2 pts:   38%  (3/8)
+       subió > 2 pts:   67%  (6/9)
+
+3.b) Comparación simple [todas, n=72]
+    Con suba > 0 pts: 59% alternancia (22/37)   Sin suba > 0 pts: 49% (17/35)   diferencia +11 pp, p Fisher (una cola) = 0.245
+    Con suba > 1 pts: 53% alternancia (9/17)   Sin suba > 1 pts: 55% (30/55)   diferencia -2 pp, p Fisher (una cola) = 0.654
+    Con suba > 2 pts: 67% alternancia (6/9)   Sin suba > 2 pts: 52% (33/63)   diferencia +14 pp, p Fisher (una cola) = 0.331
+
+3.b) Comparación simple [sin interinos ni anticipadas, n=58]
+    Con suba > 0 pts: 57% alternancia (17/30)   Sin suba > 0 pts: 43% (12/28)   diferencia +14 pp, p Fisher (una cola) = 0.215
+    Con suba > 1 pts: 54% alternancia (7/13)   Sin suba > 1 pts: 49% (22/45)   diferencia +5 pp, p Fisher (una cola) = 0.500
+    Con suba > 2 pts: 80% alternancia (4/5)   Sin suba > 2 pts: 47% (25/53)   diferencia +33 pp, p Fisher (una cola) = 0.176
+
+3.b) Comparación simple [sin presidente candidato, n=53]
+    Con suba > 0 pts: 71% alternancia (20/28)   Sin suba > 0 pts: 68% (17/25)   diferencia +3 pp, p Fisher (una cola) = 0.510
+    Con suba > 1 pts: 58% alternancia (7/12)   Sin suba > 1 pts: 73% (30/41)   diferencia -15 pp, p Fisher (una cola) = 0.908
+    Con suba > 2 pts: 86% alternancia (6/7)   Sin suba > 2 pts: 67% (31/46)   diferencia +18 pp, p Fisher (una cola) = 0.308
+
+3.c) Modelos logit (efectos marginales; EE agrupados por país)
+    cambio 2 años                                  n= 72  dif_desemp_2a: +0.8 pp por punto (p = 0.82)
+    cambio 2 años + reelección                     n= 72  dif_desemp_2a: +1.0 pp por punto (p = 0.69)
+    cambio 2 años + crec. 4a + reelección          n= 72  dif_desemp_2a: -0.5 pp por punto (p = 0.86)
+    cambio en el mandato (4 años) + reelección     n= 67  dif_desemp_4a: +1.8 pp por punto (p = 0.34)
+    nivel de desempleo en t-1 + reelección         n= 77  desemp_t1: -0.6 pp por punto (p = 0.64)
+    cambio incluyendo año electoral + reelección   n= 76  dif_desemp_2a_t0: +0.3 pp por punto (p = 0.89)
+
+    Correlación entre cambio del desempleo y crecimiento de los 2 años previos: -0.66
+
+3.d) Casos con suba del desempleo de más de 2 puntos
+    Argentina 1995: +5.4 pts -> ganó el oficialismo (presidente candidato)
+    Colombia 1998: +3.4 pts -> perdió el oficialismo
+    Venezuela 2000: +3.4 pts -> ganó el oficialismo (presidente candidato) [anticipada]
+    Argentina 2003: +4.6 pts -> ganó el oficialismo [interino]
+    Brasil 2018: +4.3 pts -> perdió el oficialismo [interino]
+    Chile 2021: +3.3 pts -> perdió el oficialismo
+    Peru 2021: +3.7 pts -> perdió el oficialismo [interino]
+    Ecuador 2021: +2.6 pts -> perdió el oficialismo
+    Colombia 2022: +3.6 pts -> perdió el oficialismo
