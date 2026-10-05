@@ -1,0 +1,91 @@
+pais,anio,mes,incumbente,ganador,alternancia,presidente_candidato,caso_especial,nota
+Argentina,1989,5,UCR (Alfonsin),Menem (PJ),1,0,,
+Argentina,1995,5,PJ (Menem),Menem (PJ),0,1,,
+Argentina,1999,10,PJ (Menem),De la Rua (Alianza),1,0,,
+Argentina,2003,4,PJ (Duhalde),Kirchner (PJ-FPV),0,0,interino,Duhalde designado por el Congreso tras la crisis de 2001
+Argentina,2007,10,FPV (Kirchner),C. Fernandez (FPV),0,0,,
+Argentina,2011,10,FPV (C. Fernandez),C. Fernandez (FPV),0,1,,
+Argentina,2015,10,FPV (C. Fernandez),Macri (Cambiemos),1,0,,
+Argentina,2019,10,Cambiemos (Macri),A. Fernandez (FdT),1,1,,
+Argentina,2023,10,UxP (A. Fernandez),Milei (LLA),1,0,,
+Bolivia,1985,7,UDP (Siles Zuazo),Paz Estenssoro (MNR),1,0,,Presidente elegido por el Congreso
+Bolivia,1989,5,MNR (Paz Estenssoro),Paz Zamora (MIR),1,0,,Presidente elegido por el Congreso
+Bolivia,1993,6,MIR-AP (Paz Zamora),Sanchez de Lozada (MNR),1,0,,
+Bolivia,1997,6,MNR (Sanchez de Lozada),Banzer (ADN),1,0,,
+Bolivia,2002,6,ADN (Quiroga),Sanchez de Lozada (MNR),1,0,,
+Bolivia,2005,12,Independiente (Rodriguez Veltze),Morales (MAS),1,0,interino,Gobierno de transicion tras renuncias de Sanchez de Lozada y Mesa
+Bolivia,2009,12,MAS (Morales),Morales (MAS),0,1,,
+Bolivia,2014,10,MAS (Morales),Morales (MAS),0,1,,
+Bolivia,2020,10,Demócratas (Áñez),Arce (MAS),1,0,interino,Gobierno de transicion tras anulacion de 2019
+Bolivia,2025,8,MAS (Arce),R. Paz (PDC),1,0,,
+Brasil,1989,11,PMDB (Sarney),Collor (PRN),1,0,,Primera eleccion directa desde 1960
+Brasil,1994,10,Itamar Franco (sin partido),Cardoso (PSDB),0,0,interino,Cardoso fue el candidato del gobierno (ex ministro de Hacienda)
+Brasil,1998,10,PSDB (Cardoso),Cardoso (PSDB),0,1,,
+Brasil,2002,10,PSDB (Cardoso),Lula (PT),1,0,,
+Brasil,2006,10,PT (Lula),Lula (PT),0,1,,
+Brasil,2010,10,PT (Lula),Rousseff (PT),0,0,,
+Brasil,2014,10,PT (Rousseff),Rousseff (PT),0,1,,
+Brasil,2018,10,MDB (Temer),Bolsonaro (PSL),1,0,interino,Temer asumio tras el impeachment de Rousseff
+Brasil,2022,10,PL (Bolsonaro),Lula (PT),1,1,,
+Chile,1993,12,Concertacion (Aylwin),Frei (Concertacion),0,0,,
+Chile,1999,12,Concertacion (Frei),Lagos (Concertacion),0,0,,
+Chile,2005,12,Concertacion (Lagos),Bachelet (Concertacion),0,0,,
+Chile,2009,12,Concertacion (Bachelet),Pinera (Coalicion por el Cambio),1,0,,
+Chile,2013,11,Alianza (Pinera),Bachelet (Nueva Mayoria),1,0,,
+Chile,2017,11,Nueva Mayoria (Bachelet),Pinera (Chile Vamos),1,0,,
+Chile,2021,11,Chile Vamos (Pinera),Boric (Apruebo Dignidad),1,0,,
+Chile,2025,11,Unidad por Chile (Boric),Kast (Republicano),1,0,,
+Colombia,1986,5,Conservador (Betancur),Barco (Liberal),1,0,,
+Colombia,1990,5,Liberal (Barco),Gaviria (Liberal),0,0,,
+Colombia,1994,5,Liberal (Gaviria),Samper (Liberal),0,0,,
+Colombia,1998,5,Liberal (Samper),Pastrana (Conservador),1,0,,
+Colombia,2002,5,Conservador (Pastrana),Uribe (Primero Colombia),1,0,,
+Colombia,2006,5,Primero Colombia (Uribe),Uribe,0,1,,
+Colombia,2010,5,Uribismo - La U (Uribe),Santos (La U),0,0,,
+Colombia,2014,5,La U (Santos),Santos (La U),0,1,,
+Colombia,2018,5,La U (Santos),Duque (Centro Democratico),1,0,,
+Colombia,2022,5,Centro Democratico (Duque),Petro (Pacto Historico),1,0,,
+Ecuador,1984,1,DP (Hurtado),Febres Cordero (PSC),1,0,,
+Ecuador,1988,1,PSC (Febres Cordero),Borja (ID),1,0,,
+Ecuador,1992,5,ID (Borja),Duran Ballen (PUR),1,0,,
+Ecuador,1996,5,PUR (Duran Ballen),Bucaram (PRE),1,0,,
+Ecuador,1998,5,FRA (Alarcon),Mahuad (DP),1,0,interino,Alarcon interino tras destitucion de Bucaram
+Ecuador,2002,10,DP (G. Noboa),Gutierrez (PSP),1,0,interino,Noboa asumio tras la caida de Mahuad
+Ecuador,2006,10,Independiente (Palacio),Correa (Alianza PAIS),1,0,interino,Palacio asumio tras la caida de Gutierrez
+Ecuador,2009,4,Alianza PAIS (Correa),Correa (Alianza PAIS),0,1,,
+Ecuador,2013,2,Alianza PAIS (Correa),Correa (Alianza PAIS),0,1,,
+Ecuador,2017,2,Alianza PAIS (Correa),Moreno (Alianza PAIS),0,0,,
+Ecuador,2021,2,Alianza PAIS (Moreno),Lasso (CREO),1,0,,
+Ecuador,2023,8,CREO (Lasso),D. Noboa (ADN),1,0,anticipada,Eleccion anticipada por muerte cruzada
+Ecuador,2025,2,ADN (D. Noboa),D. Noboa (ADN),0,1,,
+Paraguay,1993,5,Colorado (Rodriguez),Wasmosy (Colorado),0,0,,
+Paraguay,1998,5,Colorado (Wasmosy),Cubas (Colorado),0,0,,
+Paraguay,2003,4,Colorado (Gonzalez Macchi),Duarte Frutos (Colorado),0,0,,
+Paraguay,2008,4,Colorado (Duarte Frutos),Lugo (APC),1,0,,
+Paraguay,2013,4,PLRA (Franco),Cartes (Colorado),1,0,interino,Franco asumio tras el juicio politico a Lugo
+Paraguay,2018,4,Colorado (Cartes),Abdo (Colorado),0,0,,
+Paraguay,2023,4,Colorado (Abdo),Pena (Colorado),0,0,,
+Peru,1985,4,AP (Belaunde),Garcia (APRA),1,0,,
+Peru,1990,4,APRA (Garcia),Fujimori (Cambio 90),1,0,,
+Peru,1995,4,Cambio 90 (Fujimori),Fujimori,0,1,,Posterior al autogolpe de 1992
+Peru,2001,4,AP (Paniagua),Toledo (Peru Posible),1,0,interino,Gobierno de transicion tras la caida de Fujimori
+Peru,2006,4,Peru Posible (Toledo),Garcia (APRA),1,0,,
+Peru,2011,4,APRA (Garcia),Humala (Gana Peru),1,0,,
+Peru,2016,4,Gana Peru (Humala),Kuczynski (PPK),1,0,,
+Peru,2021,4,Partido Morado (Sagasti),Castillo (Peru Libre),1,0,interino,Sagasti designado por el Congreso tras la vacancia de Vizcarra
+Uruguay,1989,11,Colorado (Sanguinetti),Lacalle (Nacional),1,0,,
+Uruguay,1994,11,Nacional (Lacalle),Sanguinetti (Colorado),1,0,,
+Uruguay,1999,10,Colorado (Sanguinetti),Batlle (Colorado),0,0,,
+Uruguay,2004,10,Colorado (Batlle),Vazquez (Frente Amplio),1,0,,
+Uruguay,2009,10,Frente Amplio (Vazquez),Mujica (Frente Amplio),0,0,,
+Uruguay,2014,10,Frente Amplio (Mujica),Vazquez (Frente Amplio),0,0,,
+Uruguay,2019,10,Frente Amplio (Vazquez),Lacalle Pou (Nacional),1,0,,
+Uruguay,2024,10,Coalicion - Nacional (Lacalle Pou),Orsi (Frente Amplio),1,0,,
+Venezuela,1983,12,Copei (Herrera Campins),Lusinchi (AD),1,0,,
+Venezuela,1988,12,AD (Lusinchi),C. A. Perez (AD),0,0,,
+Venezuela,1993,12,AD (Velasquez),Caldera (Convergencia),1,0,interino,Velasquez interino tras la destitucion de Perez
+Venezuela,1998,12,Convergencia (Caldera),Chavez (MVR),1,0,,
+Venezuela,2000,7,MVR (Chavez),Chavez (MVR),0,1,anticipada,Relegitimacion tras la nueva Constitucion
+Venezuela,2006,12,MVR (Chavez),Chavez (MVR),0,1,,
+Venezuela,2012,10,PSUV (Chavez),Chavez (PSUV),0,1,,
+Venezuela,2013,4,PSUV (Maduro),Maduro (PSUV),0,1,anticipada,Eleccion anticipada por muerte de Chavez
