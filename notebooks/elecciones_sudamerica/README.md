@@ -33,7 +33,7 @@ Guyana y Surinam no están.
 
 ## Resultados
 
-### Hipótesis 1: el umbral existe, pero es más alto de lo que uno pensaría
+### Hipótesis 1: se confirma; el umbral está en torno a 4-5% anual
 
 La alternancia es lo normal en la región: pasa en el 59% de las elecciones. Al
 ordenarlas por crecimiento promedio, la proporción baja a medida que la economía
@@ -55,11 +55,12 @@ p-valor se repitió todo el procedimiento 5.000 veces con los resultados
 mezclados al azar dentro de cada país, así que ya descuenta que el umbral se
 "buscó" en los datos y que algunos países alternan más que otros.
 
-Hay que leerlo al revés de como estaba planteada la hipótesis. **No hay un piso
-debajo del cual "se dispara" la alternancia: perder es lo habitual. Lo que
-aparece es un techo: sólo con crecimiento fuerte y sostenido (más de 4,5%) el
-oficialismo logra mantenerse.** Entre 0% y 4% la tasa de alternancia es
-bastante pareja, entre 65% y 80%.
+**Esto es lo que plantea la hipótesis: cuando el crecimiento promedio cae debajo
+de ≈ 4,5%, la alternancia salta de 25% a 71%.** La forma de los datos también
+apoya un umbral más que una relación gradual: entre 0% y 4% la tasa de
+alternancia es bastante pareja (65% a 80%) y cae de golpe por encima de 4-5%.
+Lo llamativo es que el umbral es alto: un crecimiento "razonable" de 2-3% no
+alcanza para proteger al oficialismo.
 
 Advertencias:
 * El umbral no es nítido. El gráfico de la derecha en `figuras/h1_umbral.png`
