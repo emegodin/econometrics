@@ -62,19 +62,30 @@ alternancia es bastante pareja (65% a 80%) y cae de golpe por encima de 4-5%.
 Lo llamativo es que el umbral es alto: un crecimiento "razonable" de 2-3% no
 alcanza para proteger al oficialismo.
 
+**¿Cambia el resultado según qué elecciones se incluyan?**
+
+| Base | Elecciones | Debajo de ~4,5% | Encima de ~4,5% | ¿Significativo? |
+|---|---|---|---|---|
+| **Todas** | 90 | pierde el 71% | pierde el 25% | **Sí** (p = 0,003) |
+| Sin interinos ni anticipadas | 75 | 71% | 22% | **Sí** (p = 0,002) |
+| Todas, ajustando por si el presidente era candidato | 90 | +28 puntos de probabilidad de perder | | **Sí** (p = 0,007) |
+| Sacando las reelecciones | 71 | 79% | 43% | No (p = 0,25) |
+
+La tercera fila deja las 90 elecciones y descuenta estadísticamente el efecto
+de que el presidente sea candidato. Aun así, estar debajo del umbral suma unos
+28 puntos de probabilidad de alternancia, así que el umbral no se explica sólo
+por las reelecciones. La cuarta fila deja de ser significativa sobre todo
+porque encima del umbral quedan apenas 14 casos; la diferencia sigue siendo
+grande.
+
 Advertencias:
 * El umbral no es nítido. El gráfico de la derecha en `figuras/h1_umbral.png`
   muestra varios picos cercanos (entre 4% y 5%). Lo más honesto es decir
   "alrededor de 4-5%", no "4,49%".
-* Buena parte del efecto viene de **reelecciones presidenciales durante el
-  boom de las commodities** (Lula, Evo, Correa, Uribe, Chávez). Si se miran sólo
-  las elecciones donde el presidente no era candidato (n = 71), la diferencia
-  sigue siendo grande (79% contra 43%), pero deja de ser significativa
-  (p = 0,25), porque encima del umbral quedan apenas 14 casos.
-* Al controlar por "presidente candidato a la reelección", estar debajo del
-  umbral sigue sumando unos **+28 puntos porcentuales** de probabilidad de
-  alternancia (p = 0,007). Que el presidente sea candidato resta unos 46 puntos:
-  es el factor individual más fuerte de toda la base.
+* Parte del efecto viene de **reelecciones presidenciales durante el boom de
+  las commodities** (Lula, Evo, Correa, Uribe, Chávez); ver la tabla de arriba.
+  Que el presidente sea candidato resta unos 46 puntos de probabilidad de
+  alternancia: es el factor individual más fuerte de toda la base.
 * Un modelo con escalón ajusta un poco mejor que una curva suave, pero esa
   comparación favorece al escalón porque el corte se eligió con los mismos
   datos. Con 90 elecciones no se puede distinguir bien entre "umbral" y
