@@ -62,6 +62,19 @@ alternancia es bastante pareja (65% a 80%) y cae de golpe por encima de 4-5%.
 Lo llamativo es que el umbral es alto: un crecimiento "razonable" de 2-3% no
 alcanza para proteger al oficialismo.
 
+**¿Qué pasa debajo del umbral?**
+
+| Debajo de ~4,5% | Elecciones | El oficialismo pierde |
+|---|---|---|
+| Todas | 66 | **71%** (47) |
+| Sin presidente candidato | 57 | **79%** (45) |
+| Con presidente candidato | 9 | 22% (2) |
+
+Debajo del umbral el oficialismo pierde 7 de cada 10 veces, y 8 de cada 10 si
+el presidente no es candidato. La reelección no genera este resultado: es la
+excepción que permitió a algunos oficialismos sobrevivir con poco crecimiento
+(Uribe 2006, Chávez 2000, 2006 y 2012, Maduro 2013, Fujimori 1995, Noboa 2025).
+
 **¿Cambia el resultado según qué elecciones se incluyan?**
 
 | Base | Elecciones | Debajo de ~4,5% | Encima de ~4,5% | ¿Significativo? |
